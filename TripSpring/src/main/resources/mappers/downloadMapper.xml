@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.project.mapper.DownloadMapper">
+	<select id="getDownloadCount" resultType="java.lang.Integer">
+		select count(*) from download
+	</select>
+	
+	<select id="getDownloadList" resultType="com.project.domain.DownloadBean">
+		select * from download order by num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(num) from download
+	</select>
+	
+	<insert id="insertDownload">
+		insert into download(num,name,pass,subject,content,content2,content3,readcount,date,file,dfile,tag) 
+		values(#{num},#{name},#{pass},#{subject},#{content},#{content2},#{content3},#{readcount},#{date},#{file},#{dfile},#{tag})
+	</insert>
+	
+	<select id="getDownload" resultType="com.project.domain.DownloadBean">
+		select * from download where num=#{num}
+	</select>
+	
+	<update id="updateReadcount">
+		update download set readcount=readcount+1 where num=#{num}
+	</update>
+	
+	<select id="numCheck" resultType="com.project.domain.DownloadBean">
+		select * from download where num=#{num} and pass=#{pass}
+	</select>
+
+	<update id="updateDownload">
+		update download set name=#{name},subject=#{subject},content=#{content},content2=#{content2},content3=#{content3},tag=#{tag},file=#{file},dfile=#{dfile} where num=#{num}
+	</update>
+	
+	<delete id="deleteDownload">
+		delete from download where num=#{num}
+	</delete>
+
+	<select id="likeChk" resultType="java.lang.String">
+		select chk from recommendChk where num=#{num} and id=#{id}
+	</select>
+
+	<insert id="insertLike">
+		insert into recommendChk(num,id,chk) values(#{num},#{id},'y')
+	</insert>
+	<delete id="deleteLike">
+		delete from recommendChk where num=#{num} and id=#{id}
+	</delete>
+
+	<select id="likeCount" resultType="java.lang.Integer">
+		select count(*) from recommendChk where num=#{num}
+	</select>			
+<!-- 	<update id="updateRe_seq"> -->
+<!-- 		update download set re_seq=re_seq+1 where re_ref=#{re_ref} and re_seq>#{re_seq}	 -->
+<!-- 	</update> -->
+	
+
+</mapper>

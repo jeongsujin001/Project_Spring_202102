@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.project.mapper.CommentMapper">
+	
+<!-- 	<select id="getCommentCount" resultType="java.lang.Integer"> -->
+<!-- 		select count(*) from comment -->
+<!-- 	</select> -->
+	
+	<select id="getCommentList" resultType="com.project.domain.CommentBean">
+		select * from comment where comment_bnum=#{num} order by comment_ord,comment_num
+	</select>
+	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(comment_num) from comment where comment_bnum=#{comment_bnum}
+	</select>
+	
+	<insert id="insertComment">
+		insert into comment(comment_id,comment_content,comment_num,comment_bnum,comment_date,comment_lev,comment_ord,comment_del) 
+		values(#{comment_id},#{comment_content},#{comment_num},#{comment_bnum},#{comment_date},#{comment_lev},#{comment_ord},#{comment_del})
+	</insert>
+		
+<!-- 	<select id="getComment" resultType="com.project.domain.CommentBean"> -->
+<!-- 		select * from comment where num=#{num} -->
+<!-- 	</select> -->
+	
+<!-- 	<update id="updateReadcount"> -->
+<!-- 		update comment set readcount=readcount+1 where num=#{num} -->
+<!-- 	</update> -->
+	
+<!-- 	<select id="numCheck" resultType="com.project.domain.CommentBean"> -->
+<!-- 		select * from comment where num=#{num} and pass=#{pass} -->
+<!-- 	</select> -->
+	
+	<update id="updateComment">
+		update comment set comment_content=#{comment_content},comment_date=#{comment_date} where comment_num=#{comment_num} and comment_bnum=#{comment_bnum}
+	</update>
+	
+	<delete id="deleteComment">
+		delete from comment where comment_num=#{comment_num} and comment_bnum=#{comment_bnum}
+	</delete>
+
+	<select id="getCommentCount" resultType="java.lang.Integer">
+		select count(*) from comment where comment_bnum=#{num}
+	</select>
+	
+<!-- 	<update id="updateRe_seq"> -->
+<!-- 		update comment set re_seq=re_seq+1 where re_ref=#{re_ref} and re_seq>#{re_seq}	 -->
+<!-- 	</update> -->
+	
+<!-- 	<update id="fupdateComment"> -->
+<!-- 		update comment set name=#{name},subject=#{subject},content=#{content},file=#{file} where num=#{num} -->
+<!-- 	</update> -->
+	
+	
+</mapper>

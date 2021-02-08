@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.project.mapper.GCommentMapper">
+	
+	<select id="getCommentList" resultType="com.project.domain.GCommentBean">
+		select * from gcomment where comment_bnum=#{num} order by comment_ord,comment_num
+	</select>
+	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(comment_num) from gcomment where comment_bnum=#{comment_bnum}
+	</select>
+	
+	<insert id="insertComment">
+		insert into gcomment(comment_id,comment_content,comment_num,comment_bnum,comment_date,comment_lev,comment_ord,comment_del) 
+		values(#{comment_id},#{comment_content},#{comment_num},#{comment_bnum},#{comment_date},#{comment_lev},#{comment_ord},#{comment_del})
+	</insert>
+	
+	<update id="updateComment">
+		update gcomment set comment_content=#{comment_content},comment_date=#{comment_date} where comment_num=#{comment_num} and comment_bnum=#{comment_bnum}
+	</update>
+	
+	<delete id="deleteComment">
+		delete from gcomment where comment_num=#{comment_num} and comment_bnum=#{comment_bnum}
+	</delete>
+
+	<select id="getCommentCount" resultType="java.lang.Integer">
+		select count(*) from gcomment where comment_bnum=#{num}
+	</select>
+	
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.project.mapper.GalleryMapper">
+	<select id="getGalleryCount" resultType="java.lang.Integer">
+		select count(*) from gallery
+	</select>
+	
+	<select id="getGalleryList" resultType="com.project.domain.GalleryBean">
+		select * from gallery order by num desc limit #{startRow},#{pageSize}
+	</select>
+
+	<select id="getMainGalleryList" resultType="com.project.domain.GalleryBean">
+		select * from gallery order by num desc limit 0,4
+	</select>
+		
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(num) from gallery
+	</select>
+	
+	<insert id="insertGallery">
+		insert into gallery(num,name,pass,subject,content,readcount,date,file) 
+		values(#{num},#{name},#{pass},#{subject},#{content},#{readcount},#{date},#{file})
+	</insert>
+	
+	<select id="getGallery" resultType="com.project.domain.GalleryBean">
+		select * from gallery where num=#{num}
+	</select>
+	
+	<update id="updateReadcount">
+		update gallery set readcount=readcount+1 where num=#{num}
+	</update>
+	
+	<select id="numCheck" resultType="com.project.domain.GalleryBean">
+		select * from gallery where num=#{num} and pass=#{pass}
+	</select>
+
+	<update id="updateGallery">
+		update gallery set name=#{name},subject=#{subject},content=#{content},file=#{file} where num=#{num}
+	</update>
+	
+	<delete id="deleteGallery">
+		delete from gallery where num=#{num}
+	</delete>
+	
+<!-- 	<update id="updateRe_seq"> -->
+<!-- 		update gallery set re_seq=re_seq+1 where re_ref=#{re_ref} and re_seq>#{re_seq}	 -->
+<!-- 	</update> -->
+	
+
+</mapper>

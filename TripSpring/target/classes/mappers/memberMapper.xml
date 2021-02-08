@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.project.mapper.MemberMapper">
+
+        <insert id="insertMember">
+        	insert into member(id,pass,name,email,address,phone,mobile,date) values(#{id},#{pass},#{name},#{email},#{address},#{phone},#{mobile},#{date})
+        </insert>
+        
+        <select id="userCheck" resultType="com.project.domain.MemberBean">
+        	select * from member where id=#{id} and pass=#{pass}
+        </select>
+  
+         <select id="getMember" resultType="com.project.domain.MemberBean">
+        	select * from member where id=#{id} 
+        </select>
+ 
+         <update id="updateMember">
+        	update member set name=#{name},email=#{email},address=#{address},phone=#{phone},mobile=#{mobile} where id=#{id}
+        </update>
+        
+        <delete id="deleteMember">
+        	delete from member where id=#{id}
+        </delete>             
+
+  </mapper>

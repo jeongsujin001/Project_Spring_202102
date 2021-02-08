@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.project.mapper.NoticeMapper">
+	
+	<select id="getNoticeCount" resultType="java.lang.Integer">
+		select count(*) from notice
+	</select>
+	
+	<select id="getNoticeList" resultType="com.project.domain.NoticeBean">
+		select * from notice order by num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(num) from notice
+	</select>
+	
+	<insert id="insertNotice">
+		insert into notice(num,name,pass,subject,content,readcount,date) 
+		values(#{num},#{name},#{pass},#{subject},#{content},#{readcount},#{date})
+	</insert>
+	
+	<select id="getNotice" resultType="com.project.domain.NoticeBean">
+		select * from notice where num=#{num}
+	</select>
+	
+	<update id="updateReadcount">
+		update notice set readcount=readcount+1 where num=#{num}
+	</update>
+	
+	<select id="numCheck" resultType="com.project.domain.NoticeBean">
+		select * from notice where num=#{num} and pass=#{pass}
+	</select>
+	
+	<update id="updateNotice">
+		update notice set name=#{name},subject=#{subject},content=#{content} where num=#{num}
+	</update>
+	
+	<delete id="deleteNotice">
+		delete from notice where num=#{num}
+	</delete>
+	
+<!-- 	<update id="updateRe_seq"> -->
+<!-- 		update notice set re_seq=re_seq+1 where re_ref=#{re_ref} and re_seq>#{re_seq}	 -->
+<!-- 	</update> -->
+	
+<!-- 	<update id="fupdateNotice"> -->
+<!-- 		update notice set name=#{name},subject=#{subject},content=#{content},file=#{file} where num=#{num} -->
+<!-- 	</update> -->
+	
+	
+</mapper>
