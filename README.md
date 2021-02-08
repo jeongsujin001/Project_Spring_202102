@@ -1,6 +1,7 @@
 # Project_Spring_202102
 
 ![main_800](https://user-images.githubusercontent.com/73453889/107229088-bae66c80-6a60-11eb-81b8-47d7ac7b5f25.gif)
+
 여행후기를 남길수 있는 어플리케이션 프로젝트입니다.
 
 # 회원가입
